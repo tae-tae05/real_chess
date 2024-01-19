@@ -37,4 +37,13 @@ public class ChessBoard {
     public void resetBoard() {
         squares = new ChessPiece[8][8];
     }
+
+    /**
+     * printing the board out
+     */
+    public void displayBoard()
+    {
+
+    }
+
 }
