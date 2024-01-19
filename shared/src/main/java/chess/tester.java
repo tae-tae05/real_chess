@@ -8,6 +8,7 @@ public class tester
         ChessGame game = new ChessGame();
         ChessPiece piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KING);
         System.out.println("new piece is on team " + piece.getTeamColor() + " and is a " + piece.getPieceType());
-        System.out.println(game);
+        ChessBoard board = new ChessBoard();
+        board.displayBoard();
     }
 }
