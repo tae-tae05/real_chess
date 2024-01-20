@@ -17,7 +17,7 @@ public class ChessBoard {
      * @param piece    the piece to add
      */
     public void addPiece(ChessPosition position, ChessPiece piece) {
-        squares[position.getRow()][position.getColumn()] = piece;
+        squares[position.getRow() - 1][position.getColumn() - 1] = piece;
     }
     /**
      * Gets a chess piece on the chessboard
@@ -27,7 +27,7 @@ public class ChessBoard {
      * position
      */
     public ChessPiece getPiece(ChessPosition position) {
-        return squares[position.getRow()][position.getColumn()];
+        return squares[position.getRow()-1][position.getColumn()-1];
     }
 
     /**
@@ -36,66 +36,67 @@ public class ChessBoard {
      */
     public void resetBoard() {
         squares = new ChessPiece[8][8];
-        for (int i = 0; i < 8; i++)
+        for (int i = 1; i < 9; i++)
         {
-                ChessPosition pos = new ChessPosition(1, i);
+                ChessPosition pos = new ChessPosition(2, i);
                 ChessPiece piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.PAWN);
                 this.addPiece(pos, piece);
         }
-        for (int i = 0; i < 8; i++)
+        for (int i = 1; i < 9; i++)
         {
-            ChessPosition pos = new ChessPosition(6, i);
+            ChessPosition pos = new ChessPosition(7, i);
             ChessPiece piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.PAWN);
             this.addPiece(pos, piece);
         }
-        for (int i = 0; i < 8; i += 7)
+        for (int i = 1; i < 9; i += 7)
         {
-            ChessPosition pos = new ChessPosition(0,i);
-            ChessPiece piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KNIGHT);
+            ChessPosition pos = new ChessPosition(1,i);
+                ChessPiece piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK);
             this.addPiece(pos, piece);
         }
-        for (int i = 0; i < 8; i += 7)
+        for (int i = 1; i < 9; i += 7)
         {
-            ChessPosition pos = new ChessPosition(7,i);
-            ChessPiece piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KNIGHT);
-            this.addPiece(pos, piece);
-        }
-        for (int i = 1; i < 7; i += 5)
-        {
-            ChessPosition pos = new ChessPosition(0,i);
-            ChessPiece piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK);
-            this.addPiece(pos, piece);
-        }
-        for (int i = 1; i < 7; i += 5)
-        {
-            ChessPosition pos = new ChessPosition(7,i);
+            ChessPosition pos = new ChessPosition(8,i);
             ChessPiece piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.ROOK);
             this.addPiece(pos, piece);
         }
-        for (int i = 2; i < 6; i += 3)
+        for (int i = 2; i < 8; i += 5)
         {
-            ChessPosition pos = new ChessPosition(0,i);
+            ChessPosition pos = new ChessPosition(1,i);
+            ChessPiece piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KNIGHT);
+            this.addPiece(pos, piece);
+        }
+        for (int i = 2; i < 8; i += 5)
+        {
+            ChessPosition pos = new ChessPosition(8,i);
+            ChessPiece piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KNIGHT);
+            this.addPiece(pos, piece);
+        }
+        for (int i = 3; i < 7; i += 3)
+        {
+            ChessPosition pos = new ChessPosition(1,i);
             ChessPiece piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.BISHOP);
             this.addPiece(pos, piece);
         }
-        for (int i = 2; i < 6; i += 3)
+        for (int i = 3; i < 7; i += 3)
         {
-            ChessPosition pos = new ChessPosition(7,i);
+            ChessPosition pos = new ChessPosition(8,i);
             ChessPiece piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.BISHOP);
             this.addPiece(pos, piece);
         }
-        ChessPosition pos = new ChessPosition(7,3);
+        ChessPosition pos = new ChessPosition(8,4);
         ChessPiece piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.QUEEN);
         this.addPiece(pos, piece);
-        pos = new ChessPosition(7,4);
+        pos = new ChessPosition(8,5);
         piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KING);
         this.addPiece(pos, piece);
-        pos = new ChessPosition(0,3);
+        pos = new ChessPosition(1,4);
         piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.QUEEN);
         this.addPiece(pos, piece);
-        pos = new ChessPosition(0,4);
+        pos = new ChessPosition(1,5);
         piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KING);
         this.addPiece(pos, piece);
+        this.displayBoard();
     }
 
     /**
@@ -103,23 +104,100 @@ public class ChessBoard {
      */
     public void displayBoard()
     {
-        for (int i = 0; i < 8; i++)
+        for (int i = 1; i < 9; i++)
         {
-            for (int j = 0; j < 8; j++)
+            for (int j = 1; j < 9; j++)
             {
 //                System.out.print(i +"" + j + " ");
                 ChessPosition position = new ChessPosition(i, j);
 //                System.out.println(this.getPiece(position));
                 if (this.getPiece(position) == null)
                 {
-                    System.out.print("o ");
+                    System.out.print("| ");
                 }
                 else
                 {
-                    System.out.print(this.getPiece(position).getPieceType()+ " ");
+                    if(this.getPiece(position).getPieceType() == ChessPiece.PieceType.PAWN)
+                    {
+                        ChessGame.TeamColor col = this.getPiece(position).getTeamColor();
+                        switch (col)
+                        {
+                            case ChessGame.TeamColor.WHITE ->
+                            {
+                                System.out.print("|P");
+                            }
+                            case ChessGame.TeamColor.BLACK -> System.out.print("|p");
+
+                        }
+                    }
+                    if(this.getPiece(position).getPieceType() == ChessPiece.PieceType.ROOK)
+                    {
+                        ChessGame.TeamColor col = this.getPiece(position).getTeamColor();
+                        switch (col)
+                        {
+                            case ChessGame.TeamColor.WHITE ->
+                            {
+                                System.out.print("|R");
+                            }
+                            case ChessGame.TeamColor.BLACK -> System.out.print("|r");
+
+                        }
+                    }
+                    if(this.getPiece(position).getPieceType() == ChessPiece.PieceType.KNIGHT)
+                    {
+                        ChessGame.TeamColor col = this.getPiece(position).getTeamColor();
+                        switch (col)
+                        {
+                            case ChessGame.TeamColor.WHITE ->
+                            {
+                                System.out.print("|N");
+                            }
+                            case ChessGame.TeamColor.BLACK -> System.out.print("|n");
+
+                        }
+                    }
+                    if(this.getPiece(position).getPieceType() == ChessPiece.PieceType.BISHOP)
+                    {
+                        ChessGame.TeamColor col = this.getPiece(position).getTeamColor();
+                        switch (col)
+                        {
+                            case ChessGame.TeamColor.WHITE ->
+                            {
+                                System.out.print("|B");
+                            }
+                            case ChessGame.TeamColor.BLACK -> System.out.print("|b");
+
+                        }
+                    }
+                    if(this.getPiece(position).getPieceType() == ChessPiece.PieceType.QUEEN)
+                    {
+                        ChessGame.TeamColor col = this.getPiece(position).getTeamColor();
+                        switch (col)
+                        {
+                            case ChessGame.TeamColor.WHITE ->
+                            {
+                                System.out.print("|Q");
+                            }
+                            case ChessGame.TeamColor.BLACK -> System.out.print("|q");
+
+                        }
+                    }
+                    if(this.getPiece(position).getPieceType() == ChessPiece.PieceType.KING)
+                    {
+                        ChessGame.TeamColor col = this.getPiece(position).getTeamColor();
+                        switch (col)
+                        {
+                            case ChessGame.TeamColor.WHITE ->
+                            {
+                                System.out.print("|K");
+                            }
+                            case ChessGame.TeamColor.BLACK -> System.out.print("|k");
+
+                        }
+                    }
                 }
             }
-            System.out.print("\n");
+            System.out.print("|\n");
         }
     }
 
