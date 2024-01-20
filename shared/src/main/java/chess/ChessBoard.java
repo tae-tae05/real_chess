@@ -36,6 +36,66 @@ public class ChessBoard {
      */
     public void resetBoard() {
         squares = new ChessPiece[8][8];
+        for (int i = 0; i < 8; i++)
+        {
+                ChessPosition pos = new ChessPosition(1, i);
+                ChessPiece piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.PAWN);
+                this.addPiece(pos, piece);
+        }
+        for (int i = 0; i < 8; i++)
+        {
+            ChessPosition pos = new ChessPosition(6, i);
+            ChessPiece piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.PAWN);
+            this.addPiece(pos, piece);
+        }
+        for (int i = 0; i < 8; i += 7)
+        {
+            ChessPosition pos = new ChessPosition(0,i);
+            ChessPiece piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KNIGHT);
+            this.addPiece(pos, piece);
+        }
+        for (int i = 0; i < 8; i += 7)
+        {
+            ChessPosition pos = new ChessPosition(7,i);
+            ChessPiece piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KNIGHT);
+            this.addPiece(pos, piece);
+        }
+        for (int i = 1; i < 7; i += 5)
+        {
+            ChessPosition pos = new ChessPosition(0,i);
+            ChessPiece piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK);
+            this.addPiece(pos, piece);
+        }
+        for (int i = 1; i < 7; i += 5)
+        {
+            ChessPosition pos = new ChessPosition(7,i);
+            ChessPiece piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.ROOK);
+            this.addPiece(pos, piece);
+        }
+        for (int i = 2; i < 6; i += 3)
+        {
+            ChessPosition pos = new ChessPosition(0,i);
+            ChessPiece piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.BISHOP);
+            this.addPiece(pos, piece);
+        }
+        for (int i = 2; i < 6; i += 3)
+        {
+            ChessPosition pos = new ChessPosition(7,i);
+            ChessPiece piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.BISHOP);
+            this.addPiece(pos, piece);
+        }
+        ChessPosition pos = new ChessPosition(7,3);
+        ChessPiece piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.QUEEN);
+        this.addPiece(pos, piece);
+        pos = new ChessPosition(7,4);
+        piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KING);
+        this.addPiece(pos, piece);
+        pos = new ChessPosition(0,3);
+        piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.QUEEN);
+        this.addPiece(pos, piece);
+        pos = new ChessPosition(0,4);
+        piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KING);
+        this.addPiece(pos, piece);
     }
 
     /**
@@ -47,8 +107,19 @@ public class ChessBoard {
         {
             for (int j = 0; j < 8; j++)
             {
-                System.out.println(i + " " + j);
+//                System.out.print(i +"" + j + " ");
+                ChessPosition position = new ChessPosition(i, j);
+//                System.out.println(this.getPiece(position));
+                if (this.getPiece(position) == null)
+                {
+                    System.out.print("o ");
+                }
+                else
+                {
+                    System.out.print(this.getPiece(position).getPieceType()+ " ");
+                }
             }
+            System.out.print("\n");
         }
     }
 
