@@ -2,6 +2,7 @@ package chess;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 
 /**
  * Represents a single chess piece
@@ -10,12 +11,17 @@ import java.util.Collection;
  * signature of the existing methods.
  */
 public class ChessPiece {
+
     private ChessGame.TeamColor color;
     private PieceType type;
 
     public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type) {
         this.color = pieceColor;
         this.type = type;
+    }
+
+    public ChessPiece() {
+
     }
 
     /**
@@ -44,6 +50,20 @@ public class ChessPiece {
         return type;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ChessPiece that = (ChessPiece) o;
+        return color == that.color && type == that.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(color, type);
+    }
+
+
     /**
      * Calculates all the positions a chess piece can move to
      * Does not take into account moves that are illegal due to leaving the king in
@@ -52,6 +72,74 @@ public class ChessPiece {
      * @return Collection of valid moves
      */
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
-        return new ArrayList<>();
+        int row = myPosition.getRow();
+        int col = myPosition.getColumn();
+        Collection<ChessMove> moves = new ArrayList<>();
+        switch (type)
+        {
+            case ChessPiece.PieceType.BISHOP ->
+            {
+                moves = this.checkBishopMoves(board, myPosition);
+            }
+            default ->
+            {
+                System.out.print("Stuck here");
+            }
+        }
+        return moves;
+    }
+
+    public Collection<ChessMove> checkBishopMoves(ChessBoard board, ChessPosition myPosition)
+    {
+        int row = myPosition.getRow();
+        int col = myPosition.getColumn();
+        Collection<ChessMove> moves = new ArrayList<>();
+        int updatedCol = col - 1;
+        for (int i = row - 1; i > 0; i--)
+        {
+            if(updatedCol > 0)
+            {
+                ChessPosition add1 = new ChessPosition(i, updatedCol);
+                ChessMove add = new ChessMove(myPosition, add1, null);
+                moves.add(add);
+            }
+            updatedCol -= 1;
+        }
+        updatedCol = col + 1;
+        for (int i = row + 1; i < 9; i++)
+        {
+            if(updatedCol < 9)
+            {
+                ChessPosition add1 = new ChessPosition(i, updatedCol);
+                ChessMove add = new ChessMove(myPosition, add1, null);
+                moves.add(add);
+            }
+            updatedCol += 1;
+        }
+        updatedCol = col - 1;
+        for (int i = row + 1; i < 9; i++)
+        {
+            if(updatedCol > 0)
+            {
+                ChessPosition add1 = new ChessPosition(i, updatedCol);
+                ChessMove add = new ChessMove(myPosition, add1, null);
+                moves.add(add);
+            }
+            updatedCol -= 1;
+        }
+        updatedCol = col + 1;
+        for (int i = row - 1; i > 0; i--)
+        {
+            if(updatedCol < 9)
+            {
+                ChessPosition add1 = new ChessPosition(i, updatedCol);
+                ChessMove add = new ChessMove(myPosition, add1, null);
+                moves.add(add);
+            }
+            updatedCol += 1;
+        }
+        return moves;
     }
 }
+
+
