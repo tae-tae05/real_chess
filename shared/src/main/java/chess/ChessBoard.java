@@ -40,79 +40,77 @@ public class ChessBoard {
         squares = new ChessPiece[8][8];
         for (int i = 1; i < 9; i++)
         {
-                ChessPosition pos = new ChessPosition(2, i);
+                ChessPosition pos = new ChessPosition(7, i);
                 ChessPiece piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.PAWN);
                 this.addPiece(pos, piece);
         }
         for (int i = 1; i < 9; i++)
         {
-            ChessPosition pos = new ChessPosition(7, i);
+            ChessPosition pos = new ChessPosition(2, i);
             ChessPiece piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.PAWN);
             this.addPiece(pos, piece);
         }
         for (int i = 1; i < 9; i += 7)
         {
-            ChessPosition pos = new ChessPosition(1,i);
+            ChessPosition pos = new ChessPosition(8,i);
                 ChessPiece piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK);
             this.addPiece(pos, piece);
         }
         for (int i = 1; i < 9; i += 7)
         {
-            ChessPosition pos = new ChessPosition(8,i);
+            ChessPosition pos = new ChessPosition(1,i);
             ChessPiece piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.ROOK);
             this.addPiece(pos, piece);
         }
         for (int i = 2; i < 8; i += 5)
         {
-            ChessPosition pos = new ChessPosition(1,i);
+            ChessPosition pos = new ChessPosition(8,i);
             ChessPiece piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KNIGHT);
             this.addPiece(pos, piece);
         }
         for (int i = 2; i < 8; i += 5)
         {
-            ChessPosition pos = new ChessPosition(8,i);
+            ChessPosition pos = new ChessPosition(1,i);
             ChessPiece piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KNIGHT);
             this.addPiece(pos, piece);
         }
         for (int i = 3; i < 7; i += 3)
         {
-            ChessPosition pos = new ChessPosition(1,i);
+            ChessPosition pos = new ChessPosition(8,i);
             ChessPiece piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.BISHOP);
             this.addPiece(pos, piece);
         }
         for (int i = 3; i < 7; i += 3)
         {
-            ChessPosition pos = new ChessPosition(8,i);
+            ChessPosition pos = new ChessPosition(1,i);
             ChessPiece piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.BISHOP);
             this.addPiece(pos, piece);
         }
-        ChessPosition pos = new ChessPosition(8,4);
+        ChessPosition pos = new ChessPosition(1,4);
         ChessPiece piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.QUEEN);
         this.addPiece(pos, piece);
-        pos = new ChessPosition(8,5);
+        pos = new ChessPosition(1,5);
         piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KING);
         this.addPiece(pos, piece);
-        pos = new ChessPosition(1,4);
+        pos = new ChessPosition(8,4);
         piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.QUEEN);
         this.addPiece(pos, piece);
-        pos = new ChessPosition(1,5);
+        pos = new ChessPosition(8,5);
         piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KING);
         this.addPiece(pos, piece);
     }
 
     @Override
     public boolean equals(Object o) {
-        ChessBoard that = (ChessBoard) o;
         if (this == o)
         {
-            System.out.print("stop one");
             return true;
         }
         if (o == null || getClass() != o.getClass())
         {
-            System.out.print("stop two");
             return false;
         }
+        ChessBoard that = (ChessBoard) o;
 //        this.displayBoard();
 //        System.out.print("\n");
 //        that.displayBoard();
@@ -140,9 +138,7 @@ public class ChessBoard {
         {
             for (int j = 1; j < 9; j++)
             {
-//                System.out.print(i +"" + j + " ");
                 ChessPosition position = new ChessPosition(i, j);
-//                System.out.println(this.getPiece(position));
                 if (this.getPiece(position) == null)
                 {
                     System.out.print("| ");
