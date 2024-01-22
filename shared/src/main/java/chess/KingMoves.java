@@ -17,9 +17,9 @@ public class KingMoves implements MovesCalculator{
         if (col != 1){
             c -= 1;
         }
-        for (int i = r; r < row + 2 && i < 9; i++)
+        for (int i = r; i < row + 2 && i < 9; i++)
         {
-            for (int j = c; c < col + 2 && j < 9; j++)
+            for (int j = c; j < col + 2 && j < 9; j++)
             {
                 ChessPosition add1 = new ChessPosition(i, j);
                 ChessPiece checker = board.getPiece(add1);
