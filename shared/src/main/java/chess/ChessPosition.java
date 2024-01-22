@@ -52,4 +52,9 @@ public class ChessPosition {
     public int hashCode() {
         return Objects.hash(row, col);
     }
+
+    public boolean isValid(int row, int col)
+    {
+        return row > 0 && row < 9 && col > 0 && col < 9;
+    }
 }
