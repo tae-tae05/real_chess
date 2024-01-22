@@ -79,7 +79,13 @@ public class ChessPiece {
         {
             case ChessPiece.PieceType.BISHOP ->
             {
-                moves = this.checkBishopMoves(board, myPosition);
+                BishopMoves bishop = new BishopMoves();
+                moves = bishop.pieceMoves(board, myPosition, color);
+            }
+            case ChessPiece.PieceType.KING ->
+            {
+                KingMoves king = new KingMoves();
+                moves = king.pieceMoves(board, myPosition, color);
             }
             default ->
             {
@@ -89,57 +95,57 @@ public class ChessPiece {
         return moves;
     }
 
-    public Collection<ChessMove> checkBishopMoves(ChessBoard board, ChessPosition myPosition)
-    {
-        int row = myPosition.getRow();
-        int col = myPosition.getColumn();
-        Collection<ChessMove> moves = new ArrayList<>();
-        int updatedCol = col - 1;
-        for (int i = row - 1; i > 0; i--)
-        {
-            if(updatedCol > 0)
-            {
-                ChessPosition add1 = new ChessPosition(i, updatedCol);
-                ChessMove add = new ChessMove(myPosition, add1, null);
-                moves.add(add);
-            }
-            updatedCol -= 1;
-        }
-        updatedCol = col + 1;
-        for (int i = row + 1; i < 9; i++)
-        {
-            if(updatedCol < 9)
-            {
-                ChessPosition add1 = new ChessPosition(i, updatedCol);
-                ChessMove add = new ChessMove(myPosition, add1, null);
-                moves.add(add);
-            }
-            updatedCol += 1;
-        }
-        updatedCol = col - 1;
-        for (int i = row + 1; i < 9; i++)
-        {
-            if(updatedCol > 0)
-            {
-                ChessPosition add1 = new ChessPosition(i, updatedCol);
-                ChessMove add = new ChessMove(myPosition, add1, null);
-                moves.add(add);
-            }
-            updatedCol -= 1;
-        }
-        updatedCol = col + 1;
-        for (int i = row - 1; i > 0; i--)
-        {
-            if(updatedCol < 9)
-            {
-                ChessPosition add1 = new ChessPosition(i, updatedCol);
-                ChessMove add = new ChessMove(myPosition, add1, null);
-                moves.add(add);
-            }
-            updatedCol += 1;
-        }
-        return moves;
-    }
+//    public Collection<ChessMove> checkBishopMoves(ChessBoard board, ChessPosition myPosition)
+//    {
+//        int row = myPosition.getRow();
+//        int col = myPosition.getColumn();
+//        Collection<ChessMove> moves = new ArrayList<>();
+//        int updatedCol = col - 1;
+//        for (int i = row - 1; i > 0; i--)
+//        {
+//            if(updatedCol > 0)
+//            {
+//                ChessPosition add1 = new ChessPosition(i, updatedCol);
+//                ChessMove add = new ChessMove(myPosition, add1, null);
+//                moves.add(add);
+//            }
+//            updatedCol -= 1;
+//        }
+//        updatedCol = col + 1;
+//        for (int i = row + 1; i < 9; i++)
+//        {
+//            if(updatedCol < 9)
+//            {
+//                ChessPosition add1 = new ChessPosition(i, updatedCol);
+//                ChessMove add = new ChessMove(myPosition, add1, null);
+//                moves.add(add);
+//            }
+//            updatedCol += 1;
+//        }
+//        updatedCol = col - 1;
+//        for (int i = row + 1; i < 9; i++)
+//        {
+//            if(updatedCol > 0)
+//            {
+//                ChessPosition add1 = new ChessPosition(i, updatedCol);
+//                ChessMove add = new ChessMove(myPosition, add1, null);
+//                moves.add(add);
+//            }
+//            updatedCol -= 1;
+//        }
+//        updatedCol = col + 1;
+//        for (int i = row - 1; i > 0; i--)
+//        {
+//            if(updatedCol < 9)
+//            {
+//                ChessPosition add1 = new ChessPosition(i, updatedCol);
+//                ChessMove add = new ChessMove(myPosition, add1, null);
+//                moves.add(add);
+//            }
+//            updatedCol += 1;
+//        }
+//        return moves;
+//    }
 }
 
 
