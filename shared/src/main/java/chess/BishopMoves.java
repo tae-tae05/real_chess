@@ -78,7 +78,11 @@ public class BishopMoves implements MovesCalculator{
         }
         return moves;
     }
-
+    public Collection<ChessMove> helper(int row, int col, ChessBoard board, ChessPosition myPosition, ChessGame.TeamColor current)
+    {
+        Collection<ChessMove> moves = new ArrayList<>();
+        return moves;
+    }
 
 }
 //ChessPosition add1 = new ChessPosition(i, updatedCol);

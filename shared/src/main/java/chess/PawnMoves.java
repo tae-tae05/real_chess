@@ -168,4 +168,10 @@ public class PawnMoves implements MovesCalculator{
         }
         return moves;
     }
+
+    public Collection<ChessMove> helper(int row, int col, ChessBoard board, ChessPosition myPosition, ChessGame.TeamColor current)
+    {
+        Collection<ChessMove> moves = new ArrayList<>();
+        return moves;
+    }
 }
