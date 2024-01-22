@@ -102,6 +102,11 @@ public class ChessPiece {
                 Queen queen = new Queen();
                 moves = queen.pieceMoves(board, myPosition, color);
             }
+            case ChessPiece.PieceType.ROOK ->
+            {
+                RookMoves rook = new RookMoves();
+                moves = rook.pieceMoves(board, myPosition, color);
+            }
             default ->
             {
                 System.out.print("Stuck here");
