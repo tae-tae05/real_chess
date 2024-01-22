@@ -92,6 +92,11 @@ public class ChessPiece {
                 KnightMoves knight = new KnightMoves();
                 moves = knight.pieceMoves(board, myPosition, color);
             }
+            case ChessPiece.PieceType.PAWN ->
+            {
+                PawnMoves pawn = new PawnMoves();
+                moves = pawn.pieceMoves(board, myPosition, color);
+            }
             default ->
             {
                 System.out.print("Stuck here");
@@ -99,6 +104,7 @@ public class ChessPiece {
         }
         return moves;
     }
+
 
 }
 
