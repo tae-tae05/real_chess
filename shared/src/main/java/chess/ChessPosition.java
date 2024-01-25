@@ -16,6 +16,8 @@ public class ChessPosition {
         this.col = col;
     }
 
+    //testing branches message
+
     /**
      * @return which row this position is in
      * 1 codes for the bottom row
