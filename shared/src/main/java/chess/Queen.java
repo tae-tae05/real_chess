@@ -147,21 +147,9 @@ public class Queen implements MovesCalculator {
         }
         return moves;
     }
-
-    public Collection<ChessMove> helper(int row, int col, ChessBoard board, ChessPosition myPosition, ChessGame.TeamColor current) {
-        Collection<ChessMove> moves = new ArrayList<>();
-        ChessPosition checking = new ChessPosition(row, col);
-        ChessPiece spot = board.getPiece(checking);
-        if (spot == null) {
-            ChessMove move = new ChessMove(myPosition, checking, null);
-            moves.add(move);
-        } else {
-            if (spot.getTeamColor() != current) {
-                ChessMove move = new ChessMove(myPosition, checking, null);
-                moves.add(move);
-            }
-        }
-        return moves;
+    public Boolean isValid(int row, int col)
+    {
+        return row > 0 && row < 9 && col > 0 && col < 9;
     }
 }
 

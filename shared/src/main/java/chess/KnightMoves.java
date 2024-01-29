@@ -28,10 +28,9 @@ public class KnightMoves implements MovesCalculator{
         return moves;
     }
 
-    public Collection<ChessMove> helper(int row, int col, ChessBoard board, ChessPosition myPosition, ChessGame.TeamColor current)
+    public Boolean isValid(int row, int col)
     {
-        Collection<ChessMove> moves = new ArrayList<>();
-        return moves;
+        return row > 0 && row < 9 && col > 0 && col < 9;
     }
 
 
