@@ -3,36 +3,28 @@ package chess;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class KnightMoves implements MovesCalculator{
-    public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition, ChessGame.TeamColor current) {
+public class KnightMoves {
+    public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition, ChessGame.TeamColor current)
+    {
         int row = myPosition.getRow();
         int col = myPosition.getColumn();
         Collection<ChessMove> moves = new ArrayList<>();
-        int[][] possibilities = {
-                {-2, -1}, {-2, 1}, {-1, -2}, {-1, 2}, {1, -2}, {1, 2}, {2, -1}, {2, 1}
-        };
-        for (int[] possibility : possibilities)
+        int[][] possibilities = { {-2, 1}, {-2, -1}, {1,-2}, {-1, -2}, {1,2}, {-1, 2},
+                {2, 1}, {2, -1}};
+        for (int[] possible: possibilities)
         {
-            int r = row + possibility[0];
-            int c = col + possibility[1];
-            if (myPosition.isValid(r, c))
-            {
-                ChessPosition add1 = new ChessPosition(r, c);
-                ChessPiece checker = board.getPiece(add1);
-                if (checker == null || checker.getTeamColor() != current) {
-                    ChessMove add = new ChessMove(myPosition, add1, null);
-                    moves.add(add);
-                }
+            int r = row + possible[0];
+            int c = col + possible[1];
+            if (isValid(r, c) && (board.getPiece(new ChessPosition(r, c)) == null || board.getPiece(new ChessPosition(r, c)).getTeamColor() != current)){
+                ChessMove move = new ChessMove(myPosition, new ChessPosition(r, c), null);
+                moves.add(move);
             }
+
         }
         return moves;
     }
-
-    public Collection<ChessMove> helper(int row, int col, ChessBoard board, ChessPosition myPosition, ChessGame.TeamColor current)
+    public Boolean isValid(int row, int col)
     {
-        Collection<ChessMove> moves = new ArrayList<>();
-        return moves;
+        return row > 0 && row < 9 && col > 0 && col < 9;
     }
-
-
 }

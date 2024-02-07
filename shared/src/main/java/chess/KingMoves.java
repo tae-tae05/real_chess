@@ -3,38 +3,60 @@ package chess;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class KingMoves implements MovesCalculator{
+public class KingMoves implements MovesCalculator {
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition, ChessGame.TeamColor current)
     {
-        int row = myPosition.getRow();
-        int col = myPosition.getColumn();
+        int row = myPosition.getRow() - 2;
+        int col = myPosition.getColumn() - 2;
         Collection<ChessMove> moves = new ArrayList<>();
-        int r = row;
-        if (row != 1){
-            r -= 1;
-        }
-        int c = col;
-        if (col != 1){
-            c -= 1;
-        }
-        for (int i = r; i < row + 2 && i < 9; i++)
-        {
-            for (int j = c; j < col + 2 && j < 9; j++)
-            {
-                ChessPosition add1 = new ChessPosition(i, j);
-                ChessPiece checker = board.getPiece(add1);
-                if (checker == null || checker.getTeamColor() != current) {
-                    ChessMove add = new ChessMove(myPosition, add1, null);
-                    moves.add(add);
+        for(int i = 1; i < 4; i++){
+            if(isValid(row + 1, col + i)){
+                if(board.getPiece(new ChessPosition(row + 1, col + i)) == null){
+                    moves.add(new ChessMove(myPosition, new ChessPosition(row + 1, col + i), null));
                 }
+                else if (board.getPiece(new ChessPosition(row + 1, col + i)).getTeamColor() != current){
+                    moves.add(new ChessMove(myPosition, new ChessPosition(row + 1, col + i), null));
+                    break;
+                }
+                else {
+                    break;
+                }
+            }
+            else{
+                break;
+            }
+        }
+        for(int i = 1; i < 4; i++){
+            if(isValid(row + 3, col + i)){
+                if(board.getPiece(new ChessPosition(row + 3, col + i)) == null){
+                    moves.add(new ChessMove(myPosition, new ChessPosition(row + 3, col + i), null));
+                }
+                else if (board.getPiece(new ChessPosition(row + 3, col + i)).getTeamColor() != current){
+                    moves.add(new ChessMove(myPosition, new ChessPosition(row + 3, col + i), null));
+                    break;
+                }
+                else {
+                    break;
+                }
+            }
+            else{
+                break;
+            }
+        }
+        if(isValid(row + 2, col + 1)) {
+            if((board.getPiece(new ChessPosition(row + 2, col + 1)) == null) || board.getPiece(new ChessPosition(row + 2, col + 1)).getTeamColor() != current) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(row + 2, col + 1), null));
+            }
+        }
+        if(isValid(row + 2, col + 3)) {
+            if((board.getPiece(new ChessPosition(row + 2, col + 3)) == null) || board.getPiece(new ChessPosition(row + 2, col + 3)).getTeamColor() != current) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(row + 2, col + 3), null));
             }
         }
         return moves;
     }
-
-    public Collection<ChessMove> helper(int row, int col, ChessBoard board, ChessPosition myPosition, ChessGame.TeamColor current)
+    public Boolean isValid(int row, int col)
     {
-        Collection<ChessMove> moves = new ArrayList<>();
-        return moves;
+        return row > 0 && row < 9 && col > 0 && col < 9;
     }
 }

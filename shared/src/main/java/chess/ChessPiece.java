@@ -99,7 +99,7 @@ public class ChessPiece {
             }
             case ChessPiece.PieceType.QUEEN ->
             {
-                Queen queen = new Queen();
+                QueenMoves queen = new QueenMoves();
                 moves = queen.pieceMoves(board, myPosition, color);
             }
             case ChessPiece.PieceType.ROOK ->
