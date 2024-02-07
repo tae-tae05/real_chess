@@ -109,7 +109,7 @@ public class ChessPiece {
             }
             default ->
             {
-                System.out.print("Stuck here");
+                return null;
             }
         }
         return moves;
