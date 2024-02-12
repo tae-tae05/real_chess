@@ -10,8 +10,10 @@ import java.util.Arrays;
  */
 public class ChessBoard {
     private ChessPiece[][] squares = new ChessPiece[8][8];
+
     public ChessBoard() {
     }
+
     /**
      * Adds a chess piece to the chessboard
      *
@@ -23,8 +25,17 @@ public class ChessBoard {
     }
 
     public void removePiece(ChessPosition position) {
-        squares[position.getRow() -1][position.getColumn()-1] = null;
+        squares[position.getRow() - 1][position.getColumn() - 1] = null;
     }
+
+    public void movePiece(ChessMove move) {
+        ChessPiece current = getPiece(move.getStartPosition());
+        squares[move.getStartPosition().getRow()-1][move.getStartPosition().getColumn() - 1] = null;
+        int r = move.getEndPosition().getRow();
+        int c = move.getEndPosition().getColumn();
+        squares[r-1][c-1] = current;
+    }
+
     /**
      * Gets a chess piece on the chessboard
      *
@@ -33,7 +44,23 @@ public class ChessBoard {
      * position
      */
     public ChessPiece getPiece(ChessPosition position) {
-        return squares[position.getRow()-1][position.getColumn()-1];
+        return squares[position.getRow() - 1][position.getColumn() - 1];
+    }
+
+    public ChessPosition findPiece(ChessPiece piece) {
+        int r = 1;
+        int c = 1;
+        for (ChessPiece[] row : squares) {
+            c = 1;
+            for (ChessPiece tempPiece : row) {
+                if (piece.equals(tempPiece)) {
+                    return new ChessPosition(r, c);
+                }
+                c += 1;
+            }
+            r += 1;
+        }
+        return new ChessPosition(r, c);
     }
 
     /**
@@ -42,76 +69,66 @@ public class ChessBoard {
      */
     public void resetBoard() {
         squares = new ChessPiece[8][8];
-        for (int i = 1; i < 9; i++)
-        {
-                ChessPosition pos = new ChessPosition(7, i);
-                ChessPiece piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.PAWN);
-                this.addPiece(pos, piece);
+        for (int i = 1; i < 9; i++) {
+            ChessPosition pos = new ChessPosition(7, i);
+            ChessPiece piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.PAWN);
+            this.addPiece(pos, piece);
         }
-        for (int i = 1; i < 9; i++)
-        {
+        for (int i = 1; i < 9; i++) {
             ChessPosition pos = new ChessPosition(2, i);
             ChessPiece piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.PAWN);
             this.addPiece(pos, piece);
         }
-        for (int i = 1; i < 9; i += 7)
-        {
-            ChessPosition pos = new ChessPosition(8,i);
-                ChessPiece piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK);
+        for (int i = 1; i < 9; i += 7) {
+            ChessPosition pos = new ChessPosition(8, i);
+            ChessPiece piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK);
             this.addPiece(pos, piece);
         }
-        for (int i = 1; i < 9; i += 7)
-        {
-            ChessPosition pos = new ChessPosition(1,i);
+        for (int i = 1; i < 9; i += 7) {
+            ChessPosition pos = new ChessPosition(1, i);
             ChessPiece piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.ROOK);
             this.addPiece(pos, piece);
         }
-        for (int i = 2; i < 8; i += 5)
-        {
-            ChessPosition pos = new ChessPosition(8,i);
+        for (int i = 2; i < 8; i += 5) {
+            ChessPosition pos = new ChessPosition(8, i);
             ChessPiece piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KNIGHT);
             this.addPiece(pos, piece);
         }
-        for (int i = 2; i < 8; i += 5)
-        {
-            ChessPosition pos = new ChessPosition(1,i);
+        for (int i = 2; i < 8; i += 5) {
+            ChessPosition pos = new ChessPosition(1, i);
             ChessPiece piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KNIGHT);
             this.addPiece(pos, piece);
         }
-        for (int i = 3; i < 7; i += 3)
-        {
-            ChessPosition pos = new ChessPosition(8,i);
+        for (int i = 3; i < 7; i += 3) {
+            ChessPosition pos = new ChessPosition(8, i);
             ChessPiece piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.BISHOP);
             this.addPiece(pos, piece);
         }
-        for (int i = 3; i < 7; i += 3)
-        {
-            ChessPosition pos = new ChessPosition(1,i);
+        for (int i = 3; i < 7; i += 3) {
+            ChessPosition pos = new ChessPosition(1, i);
             ChessPiece piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.BISHOP);
             this.addPiece(pos, piece);
         }
-        ChessPosition pos = new ChessPosition(1,4);
+        ChessPosition pos = new ChessPosition(1, 4);
         ChessPiece piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.QUEEN);
         this.addPiece(pos, piece);
-        pos = new ChessPosition(1,5);
+        pos = new ChessPosition(1, 5);
         piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KING);
         this.addPiece(pos, piece);
-        pos = new ChessPosition(8,4);
+        pos = new ChessPosition(8, 4);
         piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.QUEEN);
         this.addPiece(pos, piece);
-        pos = new ChessPosition(8,5);
+        pos = new ChessPosition(8, 5);
         piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KING);
         this.addPiece(pos, piece);
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
-        {
+        if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass())
-        {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
         ChessBoard that = (ChessBoard) o;
@@ -123,8 +140,24 @@ public class ChessBoard {
 
     @Override
     public String toString() {
+        String total = "";
+        for (ChessPiece[] row : squares) {
+            total = total.concat("[");
+            for (ChessPiece piece : row) {
+
+                if (piece == null) {
+                    total = total.concat("null");
+                } else {
+                    total = total.concat(piece.toString());
+                }
+                total = total.concat(",");
+            }
+            total = total.concat("]\n");
+
+        }
+//        Arrays.deepToString(squares) +
         return "ChessBoard{" +
-                "squares=" + Arrays.deepToString(squares) +
+                "squares=" + total +
                 '}';
     }
 
@@ -136,101 +169,42 @@ public class ChessBoard {
     /**
      * printing the board out
      */
-    public void displayBoard()
-    {
-        for (int i = 1; i < 9; i++)
-        {
-            for (int j = 1; j < 9; j++)
-            {
-                ChessPosition position = new ChessPosition(i, j);
-                if (this.getPiece(position) == null)
-                {
-                    System.out.print("| ");
-                }
-                else
-                {
-                    if(this.getPiece(position).getPieceType() == ChessPiece.PieceType.PAWN)
-                    {
-                        ChessGame.TeamColor col = this.getPiece(position).getTeamColor();
-                        switch (col)
-                        {
-                            case ChessGame.TeamColor.WHITE ->
-                            {
-                                System.out.print("|P");
-                            }
-                            case ChessGame.TeamColor.BLACK -> System.out.print("|p");
-
-                        }
-                    }
-                    if(this.getPiece(position).getPieceType() == ChessPiece.PieceType.ROOK)
-                    {
-                        ChessGame.TeamColor col = this.getPiece(position).getTeamColor();
-                        switch (col)
-                        {
-                            case ChessGame.TeamColor.WHITE ->
-                            {
-                                System.out.print("|R");
-                            }
-                            case ChessGame.TeamColor.BLACK -> System.out.print("|r");
-
-                        }
-                    }
-                    if(this.getPiece(position).getPieceType() == ChessPiece.PieceType.KNIGHT)
-                    {
-                        ChessGame.TeamColor col = this.getPiece(position).getTeamColor();
-                        switch (col)
-                        {
-                            case ChessGame.TeamColor.WHITE ->
-                            {
-                                System.out.print("|N");
-                            }
-                            case ChessGame.TeamColor.BLACK -> System.out.print("|n");
-
-                        }
-                    }
-                    if(this.getPiece(position).getPieceType() == ChessPiece.PieceType.BISHOP)
-                    {
-                        ChessGame.TeamColor col = this.getPiece(position).getTeamColor();
-                        switch (col)
-                        {
-                            case ChessGame.TeamColor.WHITE ->
-                            {
-                                System.out.print("|B");
-                            }
-                            case ChessGame.TeamColor.BLACK -> System.out.print("|b");
-
-                        }
-                    }
-                    if(this.getPiece(position).getPieceType() == ChessPiece.PieceType.QUEEN)
-                    {
-                        ChessGame.TeamColor col = this.getPiece(position).getTeamColor();
-                        switch (col)
-                        {
-                            case ChessGame.TeamColor.WHITE ->
-                            {
-                                System.out.print("|Q");
-                            }
-                            case ChessGame.TeamColor.BLACK -> System.out.print("|q");
-
-                        }
-                    }
-                    if(this.getPiece(position).getPieceType() == ChessPiece.PieceType.KING)
-                    {
-                        ChessGame.TeamColor col = this.getPiece(position).getTeamColor();
-                        switch (col)
-                        {
-                            case ChessGame.TeamColor.WHITE ->
-                            {
-                                System.out.print("|K");
-                            }
-                            case ChessGame.TeamColor.BLACK -> System.out.print("|k");
-
-                        }
+    public void displayBoard() {
+        for(int r = 8; r > 0; r--){
+            System.out.print("[");
+            for(int c = 1; c < 9; c++) {
+                ChessPiece piece = getPiece(new ChessPosition(r, c));
+                if (piece == null) {
+                    System.out.print(" X ");
+                } else {
+                    if (piece.getTeamColor() == ChessGame.TeamColor.WHITE) {
+                        System.out.print(piece.toString());
+                    } else {
+                        System.out.print(piece.toString().toLowerCase());
                     }
                 }
+                System.out.print(",");
             }
-            System.out.print("|\n");
-        }
-    }
+            System.out.println("]\n");
+            }
+//
+//        for (ChessPiece[] row : squares) {
+//            System.out.print("[");
+//            for (ChessPiece piece : row) {
+//                if (piece == null) {
+//                    System.out.print("null");
+//                } else {
+//                    if (piece.getTeamColor() == ChessGame.TeamColor.WHITE) {
+//                        System.out.print(piece.toString());
+//                    } else {
+//                        System.out.print(piece.toString().toLowerCase());
+//                    }
+//                }
+//                System.out.print(",");
+//            }
+//            System.out.println("]\n");
+//        }
 
+    }
 }
+

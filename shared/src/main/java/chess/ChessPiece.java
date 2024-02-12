@@ -64,6 +64,16 @@ public class ChessPiece {
     }
 
 
+    @Override
+    public String toString() {
+        if(type == null){
+            return "null";
+        }
+        else{
+            return ""+ type;
+        }
+    }
+
     /**
      * Calculates all the positions a chess piece can move to
      * Does not take into account moves that are illegal due to leaving the king in

@@ -37,7 +37,7 @@ public class BishopMoves implements MovesCalculator{
                     ChessMove move = new ChessMove(myPosition, new ChessPosition(row + i, col - i), null);
                     moves.add(move);
                 }
-                else if (board.getPiece(new ChessPosition(row + i, col + i)).getTeamColor() != current){
+                else if (board.getPiece(new ChessPosition(row + i, col - i)).getTeamColor() != current){
                     ChessMove move = new ChessMove(myPosition, new ChessPosition(row + i, col - i), null);
                     moves.add(move);
                     break;
