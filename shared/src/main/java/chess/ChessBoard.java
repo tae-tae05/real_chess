@@ -30,10 +30,16 @@ public class ChessBoard {
 
     public void movePiece(ChessMove move) {
         ChessPiece current = getPiece(move.getStartPosition());
+        ChessPiece.PieceType upgrade = move.getPromotionPiece();
         squares[move.getStartPosition().getRow()-1][move.getStartPosition().getColumn() - 1] = null;
         int r = move.getEndPosition().getRow();
         int c = move.getEndPosition().getColumn();
-        squares[r-1][c-1] = current;
+        if(upgrade == null) {
+            squares[r - 1][c - 1] = current;
+        }
+        else{
+            squares[r-1][c-1] = new ChessPiece(current.getTeamColor(), upgrade);
+        }
     }
 
     /**
@@ -50,6 +56,7 @@ public class ChessBoard {
     public ChessPosition findPiece(ChessPiece piece) {
         int r = 1;
         int c = 1;
+        boolean found = false;
         for (ChessPiece[] row : squares) {
             c = 1;
             for (ChessPiece tempPiece : row) {
@@ -60,7 +67,7 @@ public class ChessBoard {
             }
             r += 1;
         }
-        return new ChessPosition(r, c);
+        return null;
     }
 
     /**
