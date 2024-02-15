@@ -245,7 +245,7 @@ public class ChessGame {
         }
         return false;
     }
-    public boolean checkDiagonal(TeamColor color, int row, int col)g{
+    public boolean checkDiagonal(TeamColor color, int row, int col){
         for(int i = 1; i < 9; i++) {
             if (isValid(row + i, col + i)) {
                 ChessPiece current = game_board.getPiece(new ChessPosition(row + i, col + i));
