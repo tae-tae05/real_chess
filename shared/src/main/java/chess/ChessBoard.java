@@ -35,11 +35,16 @@ public class ChessBoard {
         int r = move.getEndPosition().getRow();
         int c = move.getEndPosition().getColumn();
         if(upgrade == null) {
-            squares[r - 1][c - 1] = current;
+            squares[r-1][c-1] = current;
         }
         else{
             squares[r-1][c-1] = new ChessPiece(current.getTeamColor(), upgrade);
         }
+    }
+
+
+    public ChessPiece[][] getSquares(){
+        return squares;
     }
 
     /**
@@ -52,6 +57,8 @@ public class ChessBoard {
     public ChessPiece getPiece(ChessPosition position) {
         return squares[position.getRow() - 1][position.getColumn() - 1];
     }
+
+
 
     public ChessPosition findPiece(ChessPiece piece) {
         int r = 1;

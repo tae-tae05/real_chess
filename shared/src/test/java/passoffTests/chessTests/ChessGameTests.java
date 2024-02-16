@@ -5,6 +5,9 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static passoffTests.TestFactory.*;
 
 public class ChessGameTests {
